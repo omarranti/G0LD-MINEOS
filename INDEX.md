@@ -4,6 +4,10 @@ Scan by *problem*, not by name. Each row links to its `SPEC.md`.
 
 | Feature | Tags | Source | Stack | Reuse |
 |---------|------|--------|-------|-------|
+| [Programmatic SEO with Inventory Gate](features/pseo-inventory-gated-pages/SPEC.md) | seo, pseo, programmatic, nextjs, directory | directory web app | Next.js 15 (ISR) + Prisma | adapt-the-shape |
+| [Email Provider Failover (SES/Resend)](features/email-provider-failover/SPEC.md) | email, infra, transactional, failover, ses, resend | directory web app | TS + @aws-sdk/client-ses + resend | drop-in |
+| [PostHog Server-Side Capture](features/posthog-server-capture/SPEC.md) | analytics, posthog, server, webhooks, events | web app | TS (fetch, no SDK) | drop-in |
+| [Neon Dev/Prod Branch Safety](features/neon-dev-prod-branch-safety/SPEC.md) | infra, neon, database, safety, postgres, prisma | web app | Neon branches + Prisma + Node guard | reference-only |
 | [Stripe Subscription Webhook](features/stripe-subscription-webhook/SPEC.md) | payments, stripe, webhook, idempotency, subscriptions, concurrency | subscription SaaS | Next.js 15 + Prisma + Stripe | adapt-the-shape |
 | [Profile Next-Steps Engine](features/profile-next-steps-engine/SPEC.md) | personalization, onboarding, profile, ai-context, derived-signals | personal-OS dashboard | Next.js 15 + TS (pure functions) | adapt-the-shape |
 | [Social Presence Tracker](features/social-presence-tracker/SPEC.md) | social, dashboard, config-driven, personal-brand | personal-OS dashboard | Next.js 15 App Router (config-only, no persistence) | adapt-the-shape |
