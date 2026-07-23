@@ -4,6 +4,7 @@ Scan by *problem*, not by name. Each row links to its `SPEC.md`.
 
 | Feature | Tags | Source | Stack | Reuse |
 |---------|------|--------|-------|-------|
+| [iOS Sign in with Google (BFF)](features/ios-google-sign-in/SPEC.md) | auth, ios, google, oauth, swiftui, bff | iOS app | Swift / SwiftUI + GoogleSignIn | reference-only |
 | [Programmatic SEO with Inventory Gate](features/pseo-inventory-gated-pages/SPEC.md) | seo, pseo, programmatic, nextjs, directory | directory web app | Next.js 15 (ISR) + Prisma | adapt-the-shape |
 | [Email Provider Failover (SES/Resend)](features/email-provider-failover/SPEC.md) | email, infra, transactional, failover, ses, resend | directory web app | TS + @aws-sdk/client-ses + resend | drop-in |
 | [PostHog Server-Side Capture](features/posthog-server-capture/SPEC.md) | analytics, posthog, server, webhooks, events | web app | TS (fetch, no SDK) | drop-in |
