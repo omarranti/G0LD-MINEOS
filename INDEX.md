@@ -4,6 +4,7 @@ Scan by *problem*, not by name. Each row links to its `SPEC.md`.
 
 | Feature | Tags | Source | Stack | Reuse |
 |---------|------|--------|-------|-------|
+| [Stripe Subscription Webhook](features/stripe-subscription-webhook/SPEC.md) | payments, stripe, webhook, idempotency, subscriptions, concurrency | subscription SaaS | Next.js 15 + Prisma + Stripe | adapt-the-shape |
 | [Profile Next-Steps Engine](features/profile-next-steps-engine/SPEC.md) | personalization, onboarding, profile, ai-context, derived-signals | personal-OS dashboard | Next.js 15 + TS (pure functions) | adapt-the-shape |
 | [Social Presence Tracker](features/social-presence-tracker/SPEC.md) | social, dashboard, config-driven, personal-brand | personal-OS dashboard | Next.js 15 App Router (config-only, no persistence) | adapt-the-shape |
 | [AI Insights Engine (suggest + apply)](features/ai-insights-engine/SPEC.md) | ai, insights, write-back | personal-OS dashboard | Next.js 15 + Anthropic + Neon | adapt-the-shape |
