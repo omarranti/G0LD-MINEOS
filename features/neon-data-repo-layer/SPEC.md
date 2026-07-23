@@ -7,9 +7,9 @@
 
 - **Slug:** `neon-data-repo-layer`
 - **Tags:** `infra`, `data-layer`, `neon`, `postgres`, `backbone`
-- **Source project:** KIID
+- **Source project:** Loft
 - **Stack:** Next.js 15 App Router (server components + server actions) + Neon Postgres (`@neondatabase/serverless` HTTP driver, raw tagged-template SQL, no ORM)
-- **Reuse confidence:** adapt-the-shape (the `getSql` + demo-fallback + sentinel pattern is the reusable core; the files ship KIID's exact tables and type models, which you replace)
+- **Reuse confidence:** adapt-the-shape (the `getSql` + demo-fallback + sentinel pattern is the reusable core; the files ship Loft's exact tables and type models, which you replace)
 - **Status in origin:** live (single-user personal OS)
 
 ## Problem it solves
@@ -112,7 +112,7 @@ load-bearing.
   forward-compatibility, the `MutationState` discriminated union as the universal
   server-action return shape, the `Number()`-wrap discipline for `numeric` columns, and
   the "reads return `[]` on error, never throw" contract.
-- **Drop / replace (project-specific, not styling):** KIID's exact tables and the
+- **Drop / replace (project-specific, not styling):** Loft's exact tables and the
   hand-written row types in `database.ts`, the Meridian/Jordan-specific enums and label maps,
   the questionnaire model, and the demo-data fixture modules. These are content, not
   pattern. There is no layout/color/typography to drop here.

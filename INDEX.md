@@ -19,13 +19,8 @@ Scan by *problem*, not by name. Each row links to its `SPEC.md`.
 | [Neon Data Repo Layer (backbone)](features/neon-data-repo-layer/SPEC.md) | infra, data-layer, neon | personal-OS dashboard | Next.js 15 + Neon Postgres | adapt-the-shape |
 | [Profile Questionnaire (schema-driven)](features/profile-questionnaire/SPEC.md) | onboarding, profile, ai-grounding | personal-OS dashboard | Next.js 15 + Neon (jsonb) | adapt-the-shape |
 | [Dashboard App Shell (config-driven)](features/dashboard-app-shell/SPEC.md) | layout, navigation, shell | personal-OS dashboard | Next.js 15 + Tailwind | adapt-the-shape |
-| [Action Items Queue](features/action-items-queue/SPEC.md) | tasks, productivity, ai-origin | personal-OS dashboard | Next.js 15 + Server Actions + Neon | adapt-the-shape |
-| [Career Timeline + Skills](features/career-timeline-skills/SPEC.md) | career, timeline, skills | personal-OS dashboard | Next.js 15 + Server Actions + Neon | adapt-the-shape |
+| [Neon Single-Owner CRUD Module](features/neon-single-owner-crud/SPEC.md) | crud, neon, server-actions, dashboard, data-layer, pattern | personal-OS dashboard | Next.js 15 + Server Actions + Neon | adapt-the-shape |
 | [Discovery Tool (AI idea builder)](features/discovery-tool/SPEC.md) | ai, ideation, dashboard | personal-OS dashboard | Next.js 15 + Neon + Anthropic | adapt-the-shape |
-| [Goal / Idea Builder](features/goal-idea-builder/SPEC.md) | goals, planning, dashboard | personal-OS dashboard | Next.js 15 + Server Actions + Neon | adapt-the-shape |
-| [Finances + Runway](features/finances-runway/SPEC.md) | finance, runway, dashboard | personal-OS dashboard | Next.js 15 + Server Actions + Neon | reference-only |
-| [Journal Log](features/journal-log/SPEC.md) | journal, dashboard, notes | personal-OS dashboard | Next.js 15 + Server Actions + Neon | adapt-the-shape |
-| [Prospects CRM](features/prospects-crm/SPEC.md) | crm, prospects, dashboard | personal-OS dashboard | Next.js 15 + Server Actions + Neon | adapt-the-shape |
 | [Network Map](features/network-map/SPEC.md) | network, crm, visualization | personal-OS dashboard | Next.js 15 + Framer Motion + SVG + Neon | adapt-the-shape |
 | [Smart Chat over your data](features/smart-chat-over-data/SPEC.md) | ai, assistant, anthropic | personal-OS dashboard | Next.js 15 + Anthropic SDK + Neon | adapt-the-shape |
 | [Dashboard Integrations Panel](features/dashboard-integrations-panel/SPEC.md) | integrations, oauth, calendar | personal-OS dashboard | Next.js 15 + Google Calendar | reference-only |

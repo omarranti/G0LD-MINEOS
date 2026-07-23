@@ -4,7 +4,7 @@
 
 - **Slug:** `social-presence-tracker`
 - **Tags:** `social, dashboard, config-driven, personal-brand, analytics`
-- **Source project:** KIID
+- **Source project:** Loft
 - **Stack:** Next.js 15 App Router + Neon (no persistence; config-only in the captured state)
 - **Reuse confidence:** adapt-the-shape
 - **Status in origin:** live in prod
@@ -78,7 +78,7 @@ Follower counts are stored as display strings (`"~2,000"`, `"low"`) rather than 
 | `code/page.tsx` | Server Component; renders all sections from the config | `@/components/dashboard/PageHead`, `@/components/dashboard/Card`, `@/components/dashboard/Stat` + `StatGrid` |
 | `code/social-presence.ts` | Typed config object + TypeScript type exports | None (pure TS) |
 
-`page.tsx` imports from three dashboard component aliases (`PageHead`, `Card`, `Stat`/`StatGrid`). These are KIID-specific wrappers. Replace them with whatever your destination project uses for page headers and card containers.
+`page.tsx` imports from three dashboard component aliases (`PageHead`, `Card`, `Stat`/`StatGrid`). These are Loft-specific wrappers. Replace them with whatever your destination project uses for page headers and card containers.
 
 ## Structure to keep, skin to drop
 
@@ -91,7 +91,7 @@ Follower counts are stored as display strings (`"~2,000"`, `"low"`) rather than 
   - The gap section's `body` + `moves` split: prose analysis followed by an ordered action list.
 
 - **Drop (regenerate natively):**
-  - All Tailwind class names in `page.tsx`: font sizes, colors (`text-emerald`, `text-amber`, `text-text-dim`), spacing, grid layout, border styles. These are KIID's design tokens.
+  - All Tailwind class names in `page.tsx`: font sizes, colors (`text-emerald`, `text-amber`, `text-text-dim`), spacing, grid layout, border styles. These are Loft's design tokens.
   - `PageHead`, `Card`, `Stat`, `StatGrid` components. Rebuild equivalents to match the destination design system.
   - The `robots: { index: false }` metadata. Set indexing policy per destination project.
   - The user-specific content inside `social-presence.ts` (Jordan's handles, credentials, pillars). Replace with the destination user's data.
@@ -111,5 +111,5 @@ Follower counts are stored as display strings (`"~2,000"`, `"low"`) rather than 
 - Origin files:
   - `apps/web/src/app/(dashboard)/social/page.tsx` @ `5a1adfb`
   - `apps/web/src/content/social-presence.ts` @ `5a1adfb`
-- Source repo: KIID (`github.com/omarranti/Loft`)
+- Source repo: Loft (`github.com/omarranti/Loft`)
 - Related features: [[dashboard-app-shell]], [[profile-questionnaire]]

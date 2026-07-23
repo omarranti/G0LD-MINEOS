@@ -6,9 +6,9 @@
 
 - **Slug:** `smart-chat-over-data`
 - **Tags:** `ai`, `assistant`, `dashboard`, `anthropic`
-- **Source project:** KIID (personal operator OS dashboard)
+- **Source project:** Loft (personal operator OS dashboard)
 - **Stack:** Next.js 15 App Router route handler + Anthropic SDK (`@anthropic-ai/sdk`) + Neon Postgres (`@neondatabase/serverless` HTTP driver)
-- **Reuse confidence:** adapt-the-shape (the gather-data → build-prompt → call-Claude → render pattern is the reusable spine; the prompt content and data schema are KIID-specific and must be rewritten)
+- **Reuse confidence:** adapt-the-shape (the gather-data → build-prompt → call-Claude → render pattern is the reusable spine; the prompt content and data schema are Loft-specific and must be rewritten)
 - **Status in origin:** prototype (single-user, cookie-gated, no per-user auth yet)
 
 ## Problem it solves

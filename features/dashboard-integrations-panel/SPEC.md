@@ -8,7 +8,7 @@
 
 - **Slug:** `dashboard-integrations-panel`
 - **Tags:** `integrations`, `oauth`, `calendar`, `dashboard`
-- **Source project:** KIID (personal OS dashboard)
+- **Source project:** Loft (personal OS dashboard)
 - **Stack:** Next.js 15 (App Router, async server components) + Google Calendar API (intended)
 - **Reuse confidence:** reference-only (the panel UI + status-pill pattern and the typed integration contract are drop-in; the actual OAuth handshake, token store, and event fetch are all unimplemented stubs you must build)
 - **Status in origin:** prototype / scaffold (not wired, runs in demo mode)
@@ -107,7 +107,7 @@ read that refresh token, exchange it for an access token, and hit the Calendar A
   `calendar.events.readonly` scope, then implement the start + callback routes,
   the `oauth_tokens` store, and fill in the bodies of `getConnectionStatus()` and
   `pullUpcomingEvents()` where the comments mark the TODO.
-- The strings reference KIID build phases ("phase 6", "Supabase auth") and an
+- The strings reference Loft build phases ("phase 6", "Supabase auth") and an
   operator name; strip those from the descriptions for a different project.
 
 ## Provenance

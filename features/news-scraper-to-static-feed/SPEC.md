@@ -6,7 +6,7 @@
 
 - **Slug:** `news-scraper-to-static-feed`
 - **Tags:** `scraping`, `data-pipeline`, `dashboard`
-- **Source project:** KIID (Meridian Pulse intelligence dashboard)
+- **Source project:** Loft (Meridian Pulse intelligence dashboard)
 - **Stack:** Python 3 (requests + feedparser + BeautifulSoup) writing a JS file that a static HTML/JS dashboard reads. No server, no database.
 - **Reuse confidence:** reference-only (the architecture is the value; you will rewrite every source URL, the keyword buckets, and the HTML selectors for your own subject)
 - **Status in origin:** working tool, run by hand
@@ -146,4 +146,4 @@ What a future session must change to retarget this:
 - Origin file: `loft/scrape_agency_news.py` @ `29a0c3f`
 - Pairs with (not copied): `loft/dashboard/data/agency-news.js` (generated output),
   `loft/dashboard/index.html` (static consumer)
-- Related memory: `project_loft.md` (KIID: Meridian Pulse intelligence dashboard with Discovery tool)
+- Related memory: `project_loft.md` (Loft: Meridian Pulse intelligence dashboard with Discovery tool)

@@ -6,7 +6,7 @@
 
 - **Slug:** `discovery-tool`
 - **Tags:** `ai`, `ideation`, `dashboard`
-- **Source project:** KIID (personal operating-system dashboard, Jordan's build)
+- **Source project:** Loft (personal operating-system dashboard, Jordan's build)
 - **Stack:** Next.js 15 App Router + Server Actions + Neon Postgres + Anthropic SDK
 - **Reuse confidence:** adapt-the-shape (the UI + types are portable, but persistence is tied to Neon's `getSql()` + repo + sentinel-user auth, and AI grounding is tied to this dashboard's profile model)
 - **Status in origin:** prototype (single-user, sentinel owner, no real multi-tenant auth)
@@ -124,7 +124,7 @@ Note `why_jordan` is a literal column name (the owner is "Jordan"). It is the
 ## Adaptation notes
 - Rename the `why_jordan` column/field to something user-neutral, and replace the
   sentinel-owner writes with a real `user_id` from your session/auth.
-- Re-point the AI generation: `/api/chat` + `lib/claude.ts` are KIID-specific. Keep the
+- Re-point the AI generation: `/api/chat` + `lib/claude.ts` are Loft-specific. Keep the
   shape (profile-first system prompt, return structured insights) but wire your own
   Anthropic key, profile model, and `vertical` routing. Without a profile source the
   output degrades to generic.

@@ -11,7 +11,7 @@ disposable and should be regenerated to match the destination project. -->
 
 - **Slug:** `ai-insights-engine`
 - **Tags:** `ai`, `insights`, `dashboard`, `anthropic`, `write-back`
-- **Source project:** KIID (personal operator OS dashboard)
+- **Source project:** Loft (personal operator OS dashboard)
 - **Stack:** Next.js 15 App Router + Anthropic SDK (`@anthropic-ai/sdk`) + Neon Postgres (`@neondatabase/serverless` HTTP driver)
 - **Reuse confidence:** adapt-the-shape (the Insight contract, the reveal component, and the apply-route mutation pattern are drop-in shapes; the actual insight *content* is hand-written demo data and the *generation* path is not wired in this code, it lives in the sibling chat feature)
 - **Status in origin:** prototype (insights are hand-authored against demo ids; live Claude generation is the documented Phase 4 swap, not yet in these files)
@@ -160,7 +160,7 @@ Supporting deps referenced (not copied, needed to understand the shape):
     `revalidatePath` the affected pages. Demo-mode short-circuit when no DB.
   - `hasInsightContent` as the gate for whether to render the expand control.
 - **Drop (regenerate natively):**
-  - All KIID Tailwind / design-system classes: the `emerald` / `amber` /
+  - All Loft Tailwind / design-system classes: the `emerald` / `amber` /
     `danger` / `text-dim` / `bg-raised` tokens, the CRT mono uppercase labels
     with `tracking-[0.14em]`, the `⦿` golden and `⚠` risk glyphs, the pill
     "+ Add" button styling, the left-border italic context block.

@@ -6,7 +6,7 @@
 
 - **Slug:** `network-map`
 - **Tags:** `network`, `crm`, `visualization`, `dashboard`
-- **Source project:** KIID (personal OS dashboard)
+- **Source project:** Loft (personal OS dashboard)
 - **Stack:** Next.js 15 App Router (server component page + client component) + Framer Motion + raw SVG + Neon Postgres (tagged-template SQL, no ORM)
 - **Reuse confidence:** adapt-the-shape (the SVG renderer is close to drop-in once you map your contact type; the page + mutations are Neon-shaped and single-user)
 - **Status in origin:** live (personal dashboard, single operator)

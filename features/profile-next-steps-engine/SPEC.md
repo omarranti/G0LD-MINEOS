@@ -4,7 +4,7 @@
 
 - **Slug:** `profile-next-steps-engine`
 - **Tags:** `personalization, onboarding, profile, ai-context, derived-signals`
-- **Source project:** KIID (Jordan's personal-OS dashboard, `Loft`)
+- **Source project:** Loft (Jordan's personal-OS dashboard, `Loft`)
 - **Stack:** Next.js 15 App Router + TypeScript (pure functions, no I/O in the engine)
 - **Reuse confidence:** adapt-the-shape
 - **Status in origin:** live in the dashboard (demo-mode backend)

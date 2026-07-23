@@ -9,7 +9,7 @@ entirely skin and should be regenerated to match the destination project. -->
 
 - **Slug:** `dashboard-app-shell`
 - **Tags:** `layout`, `navigation`, `dashboard`, `shell`
-- **Source project:** KIID
+- **Source project:** Loft
 - **Stack:** Next.js 15 App Router (route groups, server + client components) + Tailwind
 - **Reuse confidence:** adapt-the-shape (the shell pattern and the centralized behaviors are the portable kernel; every class, glyph, and label is project-specific skin)
 - **Status in origin:** live (single-user personal OS)
@@ -67,7 +67,7 @@ but that lives outside this feature.)
   section ordering field, so an out-of-place item silently lands in the wrong group block.
 - **`status: "soon"` is the only status that renders a badge.** `ready`/`scaffold` look
   identical in the sidebar today; the field is richer than the current UI uses.
-- **`phase` is origin cruft.** It is build-ordering metadata for KIID's module rollout and
+- **`phase` is origin cruft.** It is build-ordering metadata for Loft's module rollout and
   carries no behavior. Drop it when porting.
 
 ## Code layer
