@@ -9,6 +9,7 @@ Usage:
   scripts/search.py --stack "Next.js"       match against the Stack column only
   scripts/search.py --source ios            match against the Source column only
   scripts/search.py --reuse drop-in         exact match on Reuse column
+  scripts/search.py --deep <query>          also search inside every SPEC.md body
   scripts/search.py --json <query>          machine-readable output
   scripts/search.py --list                  list every feature (no filter)
 """
@@ -48,6 +49,17 @@ def parse_index():
     return rows
 
 
+def body_snippet(spec_link, needle):
+    """Return the first SPEC.md line containing needle, or None."""
+    spec = REPO_ROOT / spec_link
+    if not spec.exists():
+        return None
+    for line in spec.read_text(errors="ignore").splitlines():
+        if needle in line.lower():
+            return line.strip()
+    return None
+
+
 def matches(row, args):
     if args.tag:
         needle = args.tag.lower()
@@ -68,7 +80,10 @@ def matches(row, args):
             row["name"], row["source"], row["stack"], row["reuse"], " ".join(row["tags"])
         ]).lower()
         if needle not in haystack:
-            return False
+            snippet = body_snippet(row["spec"], needle) if args.deep else None
+            if snippet is None:
+                return False
+            row["match"] = snippet
     return True
 
 
@@ -79,6 +94,7 @@ def main():
     parser.add_argument("--source", help="filter by source (substring match)")
     parser.add_argument("--stack", help="filter by stack (substring match)")
     parser.add_argument("--reuse", help="filter by reuse level (exact: drop-in / adapt-the-shape / reference-only)")
+    parser.add_argument("--deep", action="store_true", help="also match the query inside SPEC.md bodies")
     parser.add_argument("--json", action="store_true", help="machine-readable output")
     parser.add_argument("--list", action="store_true", help="list every feature, ignore filters")
     args = parser.parse_args()
@@ -110,6 +126,8 @@ def main():
         print(f"  spec:   {r['spec']}")
         print(f"  source: {r['source']}  |  stack: {r['stack']}")
         print(f"  tags:   {', '.join(r['tags'])}")
+        if r.get("match"):
+            print(f"  match:  {r['match']}")
         print()
 
 
