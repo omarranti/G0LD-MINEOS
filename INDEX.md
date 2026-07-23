@@ -4,6 +4,9 @@ Scan by *problem*, not by name. Each row links to its `SPEC.md`.
 
 | Feature | Tags | Source | Stack | Reuse |
 |---------|------|--------|-------|-------|
+| [Marketing Section Kit](features/marketing-section-kit/SPEC.md) | marketing, landing-page, sections, layout, conversion, structure | website template | Next.js + Tailwind + lucide | adapt-the-shape |
+| [Web Design Token System](features/web-design-token-system/SPEC.md) | design-system, tokens, tailwind, css, dark-mode, accessibility | website template | Tailwind v3 + CSS variables | adapt-the-shape |
+| [Website Launch Gate](features/website-launch-gate/SPEC.md) | website, launch, qa, checklist, seo, accessibility, performance | website standard | framework-agnostic | reference-only |
 | [iOS Sign in with Google (BFF)](features/ios-google-sign-in/SPEC.md) | auth, ios, google, oauth, swiftui, bff | iOS app | Swift / SwiftUI + GoogleSignIn | reference-only |
 | [Programmatic SEO with Inventory Gate](features/pseo-inventory-gated-pages/SPEC.md) | seo, pseo, programmatic, nextjs, directory | directory web app | Next.js 15 (ISR) + Prisma | adapt-the-shape |
 | [Email Provider Failover (SES/Resend)](features/email-provider-failover/SPEC.md) | email, infra, transactional, failover, ses, resend | directory web app | TS + @aws-sdk/client-ses + resend | drop-in |

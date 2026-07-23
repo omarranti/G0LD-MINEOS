@@ -1,0 +1,130 @@
+/**
+ * The CSS-variable layer that pairs with tailwind.config.ts. Two things carry
+ * the reuse value: (1) light + [data-theme="dark"] as swappable variable sets,
+ * so dark mode is a variable flip, not a second stylesheet; (2) the component
+ * classes (.section-*, .btn-*, .input-field) so every project renders the same
+ * primitives. Regenerate the hex/fonts; keep the variable names and classes.
+ */
+
+/* Fonts are SKIN: swap per project. */
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: "DM Serif Display", serif;
+  --font-body: "Outfit", system-ui, -apple-system, sans-serif;
+
+  --bg-primary: #F7F3EE;
+  --bg-secondary: #F0EBE3;
+  --bg-elevated: #FFFFFF;
+  --text-primary: #1C1C1E;
+  --text-soft: #3A3A3C;
+  --text-muted: rgba(28, 28, 30, 0.45);
+  --hairline: rgba(28, 28, 30, 0.08);
+  --color-accent: #7EB8D4;
+  --color-accent-deep: #3D7A96;
+  --color-cta: #1C1C1E;
+  --color-cta-light: #2C2C2E;
+  --color-warm: #C4856A;
+  --color-warm-light: #D4A08A;
+}
+
+/* Dark mode = the SAME variable names, different values. Toggle by setting
+   data-theme="dark" on <html>. No component needs to know about dark mode. */
+[data-theme="dark"] {
+  --bg-primary: #0E0E10;
+  --bg-secondary: #1A1A1C;
+  --bg-elevated: rgba(255, 255, 255, 0.04);
+  --text-primary: #F7F3EE;
+  --text-soft: rgba(247, 243, 238, 0.8);
+  --text-muted: rgba(247, 243, 238, 0.4);
+  --hairline: rgba(255, 255, 255, 0.06);
+  --color-accent: #A3D0E4;
+  --color-accent-deep: #7EB8D4;
+  --color-cta: #F7F3EE;
+  --color-cta-light: #FFFFFF;
+  --color-warm: #D4A08A;
+  --color-warm-light: #E0B8A0;
+}
+
+@layer base {
+  html {
+    @apply antialiased scroll-smooth;
+    font-family: var(--font-body);
+  }
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); }
+
+  /* Accessibility floor: honor reduced-motion everywhere, and a visible focus ring. */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+  :focus-visible { @apply outline-2 outline-offset-2 outline-brand-accent; }
+}
+
+/* Scroll reveal: base + revealed. Toggle .scroll-revealed via IntersectionObserver. */
+.scroll-reveal-base {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.scroll-revealed { opacity: 1; transform: translateY(0); }
+
+/* Section typography primitives (used by every section skeleton). */
+.section-eyebrow {
+  font-family: var(--font-body);
+  font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.3em;
+  color: var(--color-accent-deep);
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 400; line-height: 1.1;
+  color: var(--text-primary);
+}
+.section-subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(0.875rem, 1.5vw, 1.125rem);
+  line-height: 1.6; color: var(--text-soft);
+}
+
+/* Button + input primitives. */
+.btn-primary {
+  @apply inline-flex items-center gap-2 rounded-pill px-7 py-3.5 font-body text-sm font-semibold uppercase tracking-wider shadow-button transition-all hover:-translate-y-0.5 active:translate-y-0;
+  background-color: var(--color-cta);
+  color: var(--bg-primary);
+}
+.btn-primary:hover { background-color: var(--color-cta-light); }
+
+.btn-ghost {
+  @apply inline-flex items-center gap-2 rounded-pill border px-7 py-3.5 font-body text-sm font-semibold uppercase tracking-wider backdrop-blur-sm transition-all hover:-translate-y-0.5;
+  border-color: var(--hairline);
+  color: var(--text-soft);
+}
+.btn-ghost:hover { background-color: var(--bg-elevated); }
+
+.input-field {
+  @apply w-full rounded-brand-sm border px-4 py-3 font-body text-body outline-none focus:ring-2;
+  background-color: var(--bg-elevated);
+  border-color: var(--hairline);
+  color: var(--text-primary);
+  --tw-ring-color: var(--color-accent);
+}
+.input-field::placeholder { color: var(--text-muted); }
+
+/* iOS safe areas. */
+.safe-top { padding-top: env(safe-area-inset-top, 0px); }
+.safe-bottom { padding-bottom: env(safe-area-inset-bottom, 0px); }
