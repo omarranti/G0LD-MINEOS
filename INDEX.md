@@ -1,0 +1,44 @@
+# Catalog
+
+Scan by *problem*, not by name. Each row links to its `SPEC.md`.
+
+| Feature | Tags | Source | Stack | Reuse |
+|---------|------|--------|-------|-------|
+| [Profile Next-Steps Engine](features/profile-next-steps-engine/SPEC.md) | personalization, onboarding, profile, ai-context, derived-signals | personal-OS dashboard | Next.js 15 + TS (pure functions) | adapt-the-shape |
+| [Social Presence Tracker](features/social-presence-tracker/SPEC.md) | social, dashboard, config-driven, personal-brand | personal-OS dashboard | Next.js 15 App Router (config-only, no persistence) | adapt-the-shape |
+| [AI Insights Engine (suggest + apply)](features/ai-insights-engine/SPEC.md) | ai, insights, write-back | personal-OS dashboard | Next.js 15 + Anthropic + Neon | adapt-the-shape |
+| [Neon Data Repo Layer (backbone)](features/neon-data-repo-layer/SPEC.md) | infra, data-layer, neon | personal-OS dashboard | Next.js 15 + Neon Postgres | adapt-the-shape |
+| [Profile Questionnaire (schema-driven)](features/profile-questionnaire/SPEC.md) | onboarding, profile, ai-grounding | personal-OS dashboard | Next.js 15 + Neon (jsonb) | adapt-the-shape |
+| [Dashboard App Shell (config-driven)](features/dashboard-app-shell/SPEC.md) | layout, navigation, shell | personal-OS dashboard | Next.js 15 + Tailwind | adapt-the-shape |
+| [Action Items Queue](features/action-items-queue/SPEC.md) | tasks, productivity, ai-origin | personal-OS dashboard | Next.js 15 + Server Actions + Neon | adapt-the-shape |
+| [Career Timeline + Skills](features/career-timeline-skills/SPEC.md) | career, timeline, skills | personal-OS dashboard | Next.js 15 + Server Actions + Neon | adapt-the-shape |
+| [Discovery Tool (AI idea builder)](features/discovery-tool/SPEC.md) | ai, ideation, dashboard | personal-OS dashboard | Next.js 15 + Neon + Anthropic | adapt-the-shape |
+| [Goal / Idea Builder](features/goal-idea-builder/SPEC.md) | goals, planning, dashboard | personal-OS dashboard | Next.js 15 + Server Actions + Neon | adapt-the-shape |
+| [Finances + Runway](features/finances-runway/SPEC.md) | finance, runway, dashboard | personal-OS dashboard | Next.js 15 + Server Actions + Neon | reference-only |
+| [Journal Log](features/journal-log/SPEC.md) | journal, dashboard, notes | personal-OS dashboard | Next.js 15 + Server Actions + Neon | adapt-the-shape |
+| [Prospects CRM](features/prospects-crm/SPEC.md) | crm, prospects, dashboard | personal-OS dashboard | Next.js 15 + Server Actions + Neon | adapt-the-shape |
+| [Network Map](features/network-map/SPEC.md) | network, crm, visualization | personal-OS dashboard | Next.js 15 + Framer Motion + SVG + Neon | adapt-the-shape |
+| [Smart Chat over your data](features/smart-chat-over-data/SPEC.md) | ai, assistant, anthropic | personal-OS dashboard | Next.js 15 + Anthropic SDK + Neon | adapt-the-shape |
+| [Dashboard Integrations Panel](features/dashboard-integrations-panel/SPEC.md) | integrations, oauth, calendar | personal-OS dashboard | Next.js 15 + Google Calendar | reference-only |
+| [Members Access-Code Gate](features/members-access-code-gate/SPEC.md) | access, gate, privacy | members-site | Next.js 15 + Server Actions | adapt-the-shape |
+| [3D Scroll-Reveal Intro](features/intro-3d-scroll-reveal/SPEC.md) | animation, 3d, intro, ui | marketing site | Next.js 15 + Framer Motion | adapt-the-shape |
+| [Scroll Reveal on View](features/scroll-reveal-on-view/SPEC.md) | animation, ui | marketing site | Next.js 15 + framer-motion | drop-in |
+| [News Scraper to Static Feed](features/news-scraper-to-static-feed/SPEC.md) | scraping, data-pipeline, dashboard | personal-OS dashboard | Python + static dashboard | reference-only |
+| [iOS Email + Password Auth](features/ios-email-password-auth/SPEC.md) | auth, ios, email-password | iOS app | Swift / SwiftUI | adapt-the-shape |
+| [iOS Keychain Token Store](features/ios-keychain-token-store/SPEC.md) | ios, security, storage | iOS app | Swift | drop-in |
+| [iOS Sign in with Apple](features/ios-apple-sign-in/SPEC.md) | auth, ios, apple | iOS app | Swift / AuthenticationServices | adapt-the-shape |
+| [iOS Deterministic UUID from ID](features/ios-deterministic-uuid-from-id/SPEC.md) | ios, identity, data-modeling | iOS app | Swift / CryptoKit | drop-in |
+| [iOS Async API Client](features/ios-api-client/SPEC.md) | ios, networking, infra | iOS app | Swift / URLSession | drop-in |
+| [Recently Viewed](features/recently-viewed/SPEC.md) | ux, personalization | web app | Next.js 15 (browser) | drop-in |
+| [Mood Ring Check-in Card](features/mood-ring-checkin-card/SPEC.md) | onboarding, engagement, conversion | wellness web app | Next.js 15 (client) | adapt-the-shape |
+| [A/B Copy Testing](features/ab-copy-testing/SPEC.md) | cro, experimentation, copy | web app | Next.js 15 + localStorage | reference-only |
+| [Scroll Sticky CTA](features/scroll-sticky-cta/SPEC.md) | cro, conversion, ui | web app | Next.js 15 + Tailwind | adapt-the-shape |
+| [Consent-Gated Analytics](features/consent-gated-analytics/SPEC.md) | privacy, gdpr, consent | web app | Next.js + React | reference-only |
+| [Email Nurture Sequence](features/email-nurture-sequence/SPEC.md) | lifecycle, email, retention | web app | Next.js 15 + Drizzle + Resend | adapt-the-shape |
+| [UTM + App Store Attribution](features/utm-and-appstore-attribution/SPEC.md) | attribution, growth, analytics | web app | Next.js 15 (localStorage) | drop-in |
+| [SSRF URL Guard](features/ssrf-url-guard/SPEC.md) | security, ssrf, server | web app | Next.js + Node runtime | drop-in |
+| [In-Memory Rate Limit](features/token-bucket-rate-limit/SPEC.md) | infra, security, api | web app | TS (in-memory) | adapt-the-shape |
+| [PIN Auth Gate](features/pin-auth-gate/SPEC.md) | auth, admin, security | web app | Next.js 15 + Drizzle + Node crypto | adapt-the-shape |
+| [Social Share Links](features/social-share-cards/SPEC.md) | growth, sharing, social | web app | TS (browser, no deps) | drop-in |
+
+<!-- Add new rows at the top of the table body as features are captured. -->
