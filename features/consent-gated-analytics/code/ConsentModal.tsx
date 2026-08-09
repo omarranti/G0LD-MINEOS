@@ -180,7 +180,7 @@ export default function ConsentModal({ isOpen, onClose, onConsent }: ConsentModa
             <li>• Your data is encrypted and secure</li>
             <li>• You can download or delete your data anytime</li>
             <li>• We never sell your personal information</li>
-            <li>• HIPAA-compliant data handling</li>
+            <li>• Encrypted, access-audited data handling</li>
           </ul>
         </div>
 

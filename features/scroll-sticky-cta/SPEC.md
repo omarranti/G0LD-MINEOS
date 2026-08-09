@@ -26,9 +26,9 @@ gone after the first thumb-scroll.
 ## How it works
 - It is a `'use client'` component rendered fixed at `bottom-0` spanning full width,
   layered at `z-40` with a backdrop blur over a translucent glass background.
-- Visibility is purely CSS responsive, not scroll-driven: `hidden ... sm:block md:hidden`
-  shows it only in the small-to-medium band (roughly phones / small tablets) and hides
-  it on desktop. There is no scroll threshold, no `IntersectionObserver`, no debounce.
+- Visibility is purely CSS responsive, not scroll-driven: `hidden ... sm:block` shows it
+  at every width from `sm` up. Add `md:hidden` back if you want a mobile-only bar; note
+  that reads as a narrow visibility band. No scroll threshold, no `IntersectionObserver`.
 - On mount it adds a `has-sticky-cta` class to `document.body` and removes it on unmount.
   This is a layout hook so a page can pad its bottom to clear the bar. (In the origin
   no CSS currently consumes the class, so it is a wired-but-dormant escape hatch.)
@@ -52,8 +52,8 @@ transient `has-sticky-cta` class on `document.body` for the component's lifetime
   `mental-health-month` landing imports it directly. The component itself touches
   `document` only inside `useEffect`, so a direct import would still be SSR-safe, but the
   dynamic `ssr:false` import avoids hydration churn for a below-the-fold element.
-- **Desktop is deliberately excluded** (`md:hidden`). The assumption: desktop keeps the
-  hero/nav CTA in reach, mobile does not. Drop `md:hidden` if you want it everywhere.
+- **Desktop is included by default** (`sm:block`). If your desktop layout keeps the
+  hero/nav CTA in reach, add `md:hidden` to restrict the bar to the mobile band.
 - **The body-class hook is currently inert.** No stylesheet reads `.has-sticky-cta`. It is
   left in as the seam for reserving layout space; wire a CSS rule if your bar overlaps
   content.
@@ -73,9 +73,11 @@ transient `has-sticky-cta` class on `document.body` for the component's lifetime
 - Replace the `APP_STORE_URL` import with your own CTA href (or make it a prop).
 - Define or remove the theme CSS variables and custom Tailwind utilities, or replace the
   inline `style` values and class names with literals so it renders in any project.
-- Decide the breakpoint policy: keep `sm:block md:hidden` for mobile-only, or change it.
+- Decide the breakpoint policy: default `sm:block` shows everywhere; add `md:hidden` for mobile-only.
 - If you want true scroll-triggered reveal, add the listener and a CSS transition for the
   enter/exit; the current component has neither.
+- The anchor carries `data-cta="sticky-bar"`: use it as the stable selector for click
+  attribution so the bar measures something from day one.
 - Mirror the call-site `ssr: false` dynamic import if you render it on a server component
   page and want to skip SSR for it.
 

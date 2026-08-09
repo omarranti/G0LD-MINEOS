@@ -93,7 +93,7 @@ calls them). Default retention by tier: session 0, anonymous 90, account 365.
 - For durable GDPR consent, change `sessionStorage` to a cookie or `localStorage` and
   build the real `/api/consent` persistence (the route currently writes nothing).
 - Restyle `ConsentModal`: it is hard-coded to Therma's orange/red gradient, "Therma
-  Assistant" copy, the "T" avatar, the HIPAA line, and `/privacy` + `/terms-of-service`
+  Assistant" copy, the "T" avatar, the generic trust-list line ("Encrypted, access-audited data handling"), and `/privacy` + `/terms-of-service`
   hrefs. Swap all brand strings.
 - Provide a stable `sessionId` from the parent (the hook keys its mount effect on it).
 
