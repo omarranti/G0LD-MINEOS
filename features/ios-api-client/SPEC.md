@@ -5,7 +5,7 @@
 
 - **Slug:** `ios-api-client`
 - **Tags:** `ios`, `networking`, `infra`
-- **Source project:** Kosher Connect iOS
+- **Source project:** directory iOS app
 - **Stack:** Swift / URLSession async-await (Foundation only, no third-party deps)
 - **Reuse confidence:** drop-in (single file, zero external deps; swap the default base URL and Info.plist key)
 - **Status in origin:** on branch (native Swift app, pre App Store ship)
@@ -81,7 +81,7 @@ not in this file.
 
 ## Adaptation notes
 - Change the Info.plist key `KC_API_BASE_URL` and the hardcoded prod fallback
-  `https://kosherconnect.app` to your own.
+  `https://example.com` to your own.
 - Define your own `Decodable` DTOs and pass them as the `as:` type to `get`/`post`.
 - Wire `setBearerToken` to wherever your token lives (Keychain, in-memory, etc.). Remember
   to call it on app launch to restore the session, not just at login.
@@ -89,6 +89,5 @@ not in this file.
 - If you need 401-refresh, retry, or per-request timeouts, add them. None exist here.
 
 ## Provenance
-- Origin file: `rork-kosher-connect/ios/KosherConnect/Networking/APIClient.swift` @ `8ac5474`
+- Origin file: `ios/App/Networking/APIClient.swift` @ `8ac5474`
 - Pairs with: `Utilities/KeychainStore.swift` (token storage), `Utilities/AppleSignIn.swift` + `Utilities/EmailAuthService.swift` (token set), `Networking/ShabbosRepository.swift` + `Networking/HotspotsRepository.swift` + `Services/ClaimService.swift` (thin callers)
-- Related memory: `project_kosher_connect_ios_handoff.md`

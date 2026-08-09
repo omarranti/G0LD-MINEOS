@@ -5,7 +5,7 @@
 
 - **Slug:** `ios-keychain-token-store`
 - **Tags:** `ios`, `security`, `storage`, `auth`
-- **Source project:** Kosher Connect iOS
+- **Source project:** directory iOS app
 - **Stack:** Swift (Foundation + Security framework, no third-party deps)
 - **Reuse confidence:** drop-in (rename the service + the `Key` cases and it works in any iOS app)
 - **Status in origin:** on branch (iOS app pre-App-Store)
@@ -27,7 +27,7 @@ so you can't fat-finger an account string.
 
 ## How it works
 - Everything is a `kSecClassGenericPassword` item scoped by a fixed `service`
-  string (`"app.kosherconnect.session"`) and keyed by `kSecAttrAccount` (the
+  string (`"com.example.app.session"`) and keyed by `kSecAttrAccount` (the
   `Key.rawValue`). Service + account together identify one item.
 - `save(_:for:)` is **delete-then-add**, not update: it runs `SecItemDelete` first
   to clear any existing item, then `SecItemAdd` with the new data. This sidesteps
@@ -49,7 +49,7 @@ Each entry is one Keychain generic-password item:
 | Keychain attribute | Value |
 |--------------------|-------|
 | `kSecClass` | `kSecClassGenericPassword` |
-| `kSecAttrService` | `"app.kosherconnect.session"` (constant) |
+| `kSecAttrService` | `"com.example.app.session"` (constant) |
 | `kSecAttrAccount` | `Key.rawValue` (`"bff.bearer.v1"` or `"apple.userID.v1"`) |
 | `kSecValueData` | UTF-8 bytes of the string value |
 | `kSecAttrAccessible` | `kSecAttrAccessibleAfterFirstUnlock` (set on add only) |
@@ -90,7 +90,7 @@ launches but not across reinstalls (uninstalling clears the app's Keychain items
 | `code/KeychainStore.swift` | Typed `save` / `read` / `delete` / `clearAll` over `kSecClassGenericPassword` | `Foundation`, `Security` (both system frameworks, nothing to swap) |
 
 ## Adaptation notes
-- Change `service` (`"app.kosherconnect.session"`) to your own reverse-DNS string so
+- Change `service` (`"com.example.app.session"`) to your own reverse-DNS string so
   items don't collide with another app reusing this file.
 - Replace the `Key` enum cases (`bearerToken`, `appleUserID`) and their raw-value
   strings with whatever secrets you store. Versioned suffixes (`.v1`) let you rotate
@@ -102,6 +102,5 @@ launches but not across reinstalls (uninstalling clears the app's Keychain items
 - No env vars, no migrations, no API keys. The only brand string is the `service`.
 
 ## Provenance
-- Origin file: `rork-kosher-connect/ios/KosherConnect/Utilities/KeychainStore.swift` @ `8ac5474`
+- Origin file: `ios/App/Utilities/KeychainStore.swift` @ `8ac5474`
 - Pairs with: the magic-link / Sign in with Apple auth flow (token is the BFF bearer; see `.agents/ios-specs/magic-link-auth.md` in origin repo)
-- Related memory: `project_kosher_connect_ios_app_review.md` (free companion-app auth context)

@@ -6,7 +6,7 @@
 
 - **Slug:** `ios-apple-sign-in`
 - **Tags:** `auth`, `ios`, `apple`, `sign-in`
-- **Source project:** Kosher Connect iOS
+- **Source project:** directory iOS app
 - **Stack:** Swift / AuthenticationServices (UIKit window anchoring, async/await)
 - **Reuse confidence:** adapt-the-shape (the controller + delegate + continuation plumbing is drop-in; the `APIClient` / `KeychainStore` / `UserSession` calls are app-specific and must be re-pointed)
 - **Status in origin:** on branch (iOS app pre App Store ship)
@@ -129,6 +129,5 @@ struct AppleAuthResponse: Decodable {
   backend-side on first contact.
 
 ## Provenance
-- Origin file: `rork-kosher-connect/ios/KosherConnect/Utilities/AppleSignIn.swift` @ `8ac5474`
-- Related origin files: `ios/KosherConnect/Networking/DTOs.swift` (`AppleAuthRequest` / `AppleAuthResponse`), `ios/KosherConnect/Utilities/KeychainStore.swift` (`.appleUserID` key), web `src/app/api/mobile/v1/auth/apple/route.ts` (server-side JWKS verification)
-- Related memory: `project_kosher_connect_ios_app_review.md`, `project_kosher_connect_ios_handoff.md`
+- Origin file: `ios/App/Utilities/AppleSignIn.swift` @ `8ac5474`
+- Related origin files: `ios/App/Networking/DTOs.swift` (`AppleAuthRequest` / `AppleAuthResponse`), `ios/App/Utilities/KeychainStore.swift` (`.appleUserID` key), web `src/app/api/mobile/v1/auth/apple/route.ts` (server-side JWKS verification)

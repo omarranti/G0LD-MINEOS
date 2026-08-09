@@ -1,6 +1,6 @@
 import Foundation
 
-/// Thin HTTPS client for the Kosher Connect mobile BFF.
+/// Thin HTTPS client for the app mobile BFF.
 /// Base URL comes from `KC_API_BASE_URL` in Info.plist (defaults to prod).
 enum APIError: Error, LocalizedError {
     case badURL
@@ -32,7 +32,7 @@ actor APIClient {
         let configured = baseURL
             ?? (Bundle.main.object(forInfoDictionaryKey: "KC_API_BASE_URL") as? String)
                 .flatMap(URL.init(string:))
-            ?? URL(string: "https://kosherconnect.app")!
+            ?? URL(string: "https://example.com")!
         self.baseURL = configured
         self.session = session
     }

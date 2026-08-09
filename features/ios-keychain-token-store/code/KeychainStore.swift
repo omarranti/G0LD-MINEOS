@@ -2,10 +2,10 @@ import Foundation
 import Security
 
 /// Minimal Keychain wrapper for the BFF bearer token and Apple user ID.
-/// One service ("app.kosherconnect.session") under the app's default access
+/// One service ("com.example.app.session") under the app's default access
 /// group. Items persist across launches but not across reinstalls.
 enum KeychainStore {
-    private static let service = "app.kosherconnect.session"
+    private static let service = "com.example.app.session"
 
     enum Key: String {
         case bearerToken = "bff.bearer.v1"

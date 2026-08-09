@@ -7,7 +7,7 @@
 
 - **Slug:** `ios-email-password-auth`
 - **Tags:** `auth`, `ios`, `email-password`
-- **Source project:** Kosher Connect iOS
+- **Source project:** directory iOS app
 - **Stack:** Swift / SwiftUI (Foundation, async/await, Security/Keychain)
 - **Reuse confidence:** adapt-the-shape (the persist-token-and-prime-client pattern is the reusable spine; endpoints, DTOs, and the Keychain/APIClient singletons are KC-specific and must be swapped)
 - **Status in origin:** on branch (iOS app pre App Store ship)
@@ -51,7 +51,7 @@ shared API client), so the rest of the app only ever sees a `UserSession`.
   `Authorization: Bearer <token>`, and (3) returns `UserSession.fromDTO(response.user)`.
 - `name` is normalized at the edge: an empty string is coerced to `nil` before it goes
   in the request body (`name?.isEmpty == false ? name : nil`).
-- The session token lands in the **iOS Keychain**, service `app.kosherconnect.session`,
+- The session token lands in the **iOS Keychain**, service `com.example.app.session`,
   account `bff.bearer.v1`, accessibility `kSecAttrAccessibleAfterFirstUnlock`. The
   in-memory copy lives on the `APIClient` actor.
 
@@ -59,7 +59,7 @@ shared API client), so the rest of the app only ever sees a `UserSession`.
 Not a database. Persistence is the iOS Keychain plus in-memory client state.
 
 - **Keychain** (via `KeychainStore`): generic-password item, service
-  `app.kosherconnect.session`, account key `bff.bearer.v1` (enum
+  `com.example.app.session`, account key `bff.bearer.v1` (enum
   `KeychainStore.Key.bearerToken`). Saved with `kSecAttrAccessibleAfterFirstUnlock`.
   A `save` does a `SecItemDelete` then `SecItemAdd` (upsert). Persists across launches,
   cleared on reinstall.
@@ -124,6 +124,5 @@ Not copied but required to compile (KC-specific, easy analogs in any app):
   to carry over.
 
 ## Provenance
-- Origin file: `rork-kosher-connect/ios/KosherConnect/Utilities/EmailAuthService.swift` @ `8ac5474`
+- Origin file: `ios/App/Utilities/EmailAuthService.swift` @ `8ac5474`
 - Pairs with (same repo, same commit): `Utilities/KeychainStore.swift`, `Networking/APIClient.swift`, `Networking/DTOs.swift` (`AppleAuthResponse`, `MeDTO`), `Models/UserSession.swift`, `Utilities/AppleSignIn.swift` (the sibling that defined the shared envelope)
-- Related memory: `project_kosher_connect_ios_app_review.md` (access-only / companion-app posture), `project_kosher_connect_ios_handoff.md`

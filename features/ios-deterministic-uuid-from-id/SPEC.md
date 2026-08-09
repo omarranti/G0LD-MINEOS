@@ -6,7 +6,7 @@
 
 - **Slug:** `ios-deterministic-uuid-from-id`
 - **Tags:** `ios`, `identity`, `data-modeling`
-- **Source project:** Kosher Connect iOS
+- **Source project:** directory iOS app
 - **Stack:** Swift (Foundation + CryptoKit, no third-party deps)
 - **Reuse confidence:** drop-in
 - **Status in origin:** live in prod (v1.0 correctness fix)
@@ -59,5 +59,5 @@ exposed by the helper.
   string id (the v1.1 direction) instead of adopting this.
 
 ## Provenance
-- Origin file: `rork-kosher-connect/ios/KosherConnect/Networking/StableID.swift` @ `8ac5474`
+- Origin file: `ios/App/Networking/StableID.swift` @ `8ac5474`
 - Related features: [[ios-api-client]]

@@ -5,7 +5,7 @@
 
 - **Slug:** `recently-viewed`
 - **Tags:** `ux`, `personalization`, `engagement`
-- **Source project:** Kosher Connect web
+- **Source project:** directory / marketplace web app
 - **Stack:** Next.js 15 App Router + React 19 (browser-only module, no Prisma / no API)
 - **Reuse confidence:** drop-in (rename the storage key and the entry shape, nothing else)
 - **Status in origin:** live in prod
@@ -103,6 +103,6 @@ cleanly orphans the old shape if `RecentlyViewedEntry` ever changes.
   request-size / consent trade-offs.
 
 ## Provenance
-- Origin file: `kosher-connect-web/src/lib/recently-viewed.ts` @ `457d8e1`
+- Origin file: `src/lib/recently-viewed.ts` @ `457d8e1`
 - Pairs with: listing-card click handler, listing detail page, `/account` recently-viewed panel
 - Related features: [[claim-with-domain-auto-approve]]
