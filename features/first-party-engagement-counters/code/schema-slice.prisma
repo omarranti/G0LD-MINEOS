@@ -1,0 +1,20 @@
+// ListingMetric slice from prisma/schema.prisma (verbatim).
+// Requires the back-relation on your entity model, e.g. on Listing:
+//   metrics ListingMetric[]
+
+model ListingMetric {
+  id             String   @id @default(cuid())
+  listing        Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  listingId      String
+  /// UTC calendar day the counters belong to.
+  day            DateTime @db.Date
+  views          Int      @default(0)
+  phoneTaps      Int      @default(0)
+  websiteClicks  Int      @default(0)
+  directionsTaps Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@unique([listingId, day])
+  @@index([day])
+}
