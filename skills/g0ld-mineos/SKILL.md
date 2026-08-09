@@ -19,12 +19,12 @@ before anything else, then proceed normally:
                                                                  
 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
-  FEATURE LIBRARY  --  36 MODULES LOADED
+  FEATURE LIBRARY  --  40 MODULES LOADED
 
   C:\> WELCOME TO G0LD-MINEOS_
 ```
 
-36 production-pulled feature patterns. Each has two layers:
+40 production-pulled feature patterns. Each has two layers:
 - `SPEC.md` — the problem, key decisions, gotchas, data model, reuse level, adaptation notes.
 - `code/` — verbatim source from the app it shipped in.
 
@@ -36,8 +36,8 @@ attribution, scroll/UI animation, iOS networking/auth, etc.
 
 ## How to use it
 
-1. **Locate the library.** Check `~/Documents/GitHub/G0LD-MINEOS` first. If missing,
-   clone it: `git clone https://github.com/omarranti/G0LD-MINEOS ~/Documents/GitHub/G0LD-MINEOS`.
+1. **Locate the library.** Check `~/G0LD-MINEOS` first. If missing,
+   clone it: `git clone https://github.com/omarranti/G0LD-MINEOS ~/G0LD-MINEOS`.
    If present, `git pull` to get the latest before relying on it.
 2. **Search, don't grep by hand.** Use `scripts/search.py` (stdlib Python, no deps):
    - `scripts/search.py "rate limit"` — substring match across name/tags/source/stack/reuse

@@ -2,7 +2,7 @@
 set -euo pipefail
 
 REPO_URL="https://github.com/omarranti/G0LD-MINEOS.git"
-CACHE_DIR="${G0LD_MINEOS_DIR:-$HOME/Documents/GitHub/G0LD-MINEOS}"
+CACHE_DIR="${G0LD_MINEOS_DIR:-$HOME/G0LD-MINEOS}"
 SKILLS_DIR="$HOME/.claude/skills/g0ld-mineos"
 
 GREEN='\033[0;32m'
