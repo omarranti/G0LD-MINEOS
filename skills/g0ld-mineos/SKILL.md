@@ -19,12 +19,12 @@ before anything else, then proceed normally:
                                                                  
 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
-  FEATURE LIBRARY  --  40 MODULES LOADED
+  FEATURE LIBRARY  --  64 MODULES LOADED
 
   C:\> WELCOME TO G0LD-MINEOS_
 ```
 
-40 production-pulled feature patterns. Each has two layers:
+64 production-pulled feature patterns. Each has two layers:
 - `SPEC.md` — the problem, key decisions, gotchas, data model, reuse level, adaptation notes.
 - `code/` — verbatim source from the app it shipped in.
 

@@ -9,10 +9,10 @@
                                                                  
 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
-  FEATURE LIBRARY  --  40 MODULES LOADED
+  FEATURE LIBRARY  --  64 MODULES LOADED
 
   [ SYSTEM CHECK ]......................................... OK
-  [ MEMORY TEST  ] 640K CONVENTIONAL + 40 FEATURES......... OK
+  [ MEMORY TEST  ] 640K CONVENTIONAL + 64 FEATURES......... OK
   [ CATALOG      ] INDEX.md................................ FOUND
   [ SEARCH       ] scripts/search.py....................... ONLINE
   [ SKILL        ] g0ld-mineos............................. READY
@@ -20,7 +20,7 @@
   C:\> WELCOME TO G0LD-MINEOS_
 ```
 
-A library of 40 reusable, production-pulled feature patterns for SaaS, dashboard, and mobile apps. Each feature has two layers:
+A library of 64 reusable, production-pulled feature patterns for SaaS, dashboard, and mobile apps. Each feature has two layers:
 
 - **Knowledge** — `SPEC.md`: the problem, the key decisions, the gotchas, the data model, and what to change when you adapt it.
 - **Code** — `code/`: verbatim source from the app it shipped in.
