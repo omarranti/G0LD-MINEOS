@@ -4,6 +4,12 @@ Scan by *problem*, not by name. Each row links to its `SPEC.md`.
 
 | Feature | Tags | Source | Stack | Reuse |
 |---------|------|--------|-------|-------|
+| [Action Items Queue](features/action-items-queue/SPEC.md) | tasks, productivity, ai-origin | personal-OS dashboard | Next.js 15 + Server Actions + Neon | adapt-the-shape |
+| [Career Timeline + Skills](features/career-timeline-skills/SPEC.md) | career, timeline, skills | personal-OS dashboard | Next.js 15 + Server Actions + Neon | adapt-the-shape |
+| [Goal / Idea Builder](features/goal-idea-builder/SPEC.md) | goals, planning, dashboard | personal-OS dashboard | Next.js 15 + Server Actions + Neon | adapt-the-shape |
+| [Finances + Runway](features/finances-runway/SPEC.md) | finance, runway, dashboard | personal-OS dashboard | Next.js 15 + Server Actions + Neon | reference-only |
+| [Journal Log](features/journal-log/SPEC.md) | journal, dashboard, notes | personal-OS dashboard | Next.js 15 + Server Actions + Neon | adapt-the-shape |
+| [Prospects CRM](features/prospects-crm/SPEC.md) | crm, prospects, dashboard | personal-OS dashboard | Next.js 15 + Server Actions + Neon | adapt-the-shape |
 | [LLM Transcript Corpus Ingest (map-reduce, SSE progress, weighted FTS)](features/llm-transcript-corpus-ingest/SPEC.md) | llm, map-reduce, ingestion, sse, streaming, full-text-search, tsvector, knowledge-base, taxonomy | wellness web app (marketing site + team console) | Next.js 15 App Router + Drizzle + Postgres + Anthropic Messages API | adapt-the-shape |
 | [Multi-Provider Metrics Snapshot (null = unavailable, cron writes, pages read)](features/multi-provider-metrics-snapshot/SPEC.md) | dashboard, integrations, cron, aggregation, kv-cache, resilience, vercel-cron, metrics | wellness web app (marketing site + team console) | Next.js 15 App Router + Drizzle + Postgres + Vercel Cron | drop-in |
 | [Canvas Multi-Ratio Slide Exporter](features/canvas-multi-ratio-slide-exporter/SPEC.md) | social-assets, canvas, export, generative-art, seeded-rng, playwright, marketing, automation | wellness web app (marketing site + team console) | Next.js App Router client page (Canvas 2D) + Playwright driver | adapt-the-shape |
