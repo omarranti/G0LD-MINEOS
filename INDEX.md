@@ -4,6 +4,10 @@ Scan by *problem*, not by name. Each row links to its `SPEC.md`.
 
 | Feature | Tags | Source | Stack | Reuse |
 |---------|------|--------|-------|-------|
+| [Admin Gate at the Edge (closing the RSC payload leak)](features/admin-gate-edge-middleware/SPEC.md) | security, auth, admin, middleware, edge-runtime, nextjs, app-router, data-leak | directory / marketplace web app | Next.js 15 App Router + Edge middleware + WebCrypto | drop-in |
+| [Email Opt-Out and RFC 8058 One-Click Unsubscribe](features/email-optout-one-click/SPEC.md) | email, compliance, unsubscribe, rfc8058, deliverability, lifecycle, prefetch, idempotency | directory / marketplace web app | Next.js 15 route handler + Prisma + Postgres | drop-in |
+| [Progress Registry Surface Doctor](features/progress-registry-surface-doctor/SPEC.md) | ci, drift-detection, registry, admin, internal-tooling, static-analysis, dead-instrumentation, meta-pattern | directory / marketplace web app | TypeScript (tsx + node:fs) + Prisma for live checks | adapt-the-shape |
+| [Location Provenance Resolver](features/location-provenance-resolver/SPEC.md) | geo, location, personalization, data-quality, provenance, admin, confidence, derived-signals | directory / marketplace web app | TypeScript, pure functions | adapt-the-shape |
 | [Action Items Queue](features/action-items-queue/SPEC.md) | tasks, productivity, ai-origin | personal-OS dashboard | Next.js 15 + Server Actions + Neon | adapt-the-shape |
 | [Career Timeline + Skills](features/career-timeline-skills/SPEC.md) | career, timeline, skills | personal-OS dashboard | Next.js 15 + Server Actions + Neon | adapt-the-shape |
 | [Goal / Idea Builder](features/goal-idea-builder/SPEC.md) | goals, planning, dashboard | personal-OS dashboard | Next.js 15 + Server Actions + Neon | adapt-the-shape |

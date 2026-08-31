@@ -12,10 +12,23 @@
 
 const POSTHOG_CAPTURE_URL = "https://us.i.posthog.com/capture/";
 
+/**
+ * `clientIp` controls GeoIP. PostHog geolocates whichever IP posts to
+ * /capture/, and a server-side capture posts from your serverless function,
+ * so without this every event is stamped with the DATACENTER's city, which
+ * is indistinguishable from a real one in a breakdown.
+ *
+ * The contract is: emit exactly one of `$ip` (geolocate the real person) or
+ * `$geoip_disable` (record no location at all). Never neither. Callers that
+ * run inside a user's request (auth callbacks, route handlers) can pass the
+ * client IP; webhook and cron callers have no client IP to give and get
+ * GeoIP switched off rather than a wrong location.
+ */
 export async function captureServer(
   distinctId: string,
   event: string,
   properties?: Record<string, string | number | boolean | null | undefined>,
+  clientIp?: string | null,
 ): Promise<void> {
   const apiKey = process.env.NEXT_PUBLIC_POSTHOG_KEY;
   if (!apiKey) return;
@@ -29,7 +42,11 @@ export async function captureServer(
         event,
         distinct_id: distinctId,
         // Tag server events so you can tell them apart from client SDK events.
-        properties: { ...properties, $lib: "app-server" },
+        properties: {
+          ...properties,
+          $lib: "app-server",
+          ...(clientIp ? { $ip: clientIp } : { $geoip_disable: true }),
+        },
         timestamp: new Date().toISOString(),
       }),
       // Never let a slow analytics host stall the webhook/cron that called us.
