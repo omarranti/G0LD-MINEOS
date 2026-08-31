@@ -1,0 +1,120 @@
+{
+  "framework": "nextjs",
+  "crons": [
+    {
+      "path": "/api/cron/review-digest",
+      "schedule": "0 14 * * 0-5"
+    },
+    {
+      "path": "/api/cron/auto-approve-digest",
+      "schedule": "30 14 * * *"
+    },
+    {
+      "path": "/api/cron/city-alerts",
+      "schedule": "0 15 * * 0-5"
+    },
+    {
+      "path": "/api/cron/cleanup",
+      "schedule": "0 3 * * *"
+    },
+    {
+      "path": "/api/cron/user-purge",
+      "schedule": "0 4 * * *"
+    },
+    {
+      "path": "/api/cron/lifecycle",
+      "schedule": "30 15 * * 0-5"
+    },
+    {
+      "path": "/api/cron/win-back",
+      "schedule": "45 15 * * 0-5"
+    },
+    {
+      "path": "/api/cron/nudge-stalled",
+      "schedule": "0 16 * * 0-5"
+    },
+    {
+      "path": "/api/cron/nudge-quiz-abandoners",
+      "schedule": "0 17 * * 0-5"
+    },
+    {
+      "path": "/api/cron/trial-ending",
+      "schedule": "30 17 * * 0-5"
+    },
+    {
+      "path": "/api/cron/trial-expired",
+      "schedule": "0 18 * * 0-5"
+    },
+    {
+      "path": "/api/cron/founding-countdown",
+      "schedule": "45 17 * * 0-5"
+    },
+    {
+      "path": "/api/cron/founding-seats-weekly",
+      "schedule": "30 18 * * 2"
+    },
+    {
+      "path": "/api/cron/review-promo-nudge",
+      "schedule": "0 16 * * 0-5"
+    },
+    {
+      "path": "/api/cron/sponsor-trial-ending",
+      "schedule": "30 16 * * 0-5"
+    },
+    {
+      "path": "/api/indexnow",
+      "schedule": "0 6 * * *"
+    },
+    {
+      "path": "/api/cron/outreach-followups",
+      "schedule": "0 9 * * *"
+    },
+    {
+      "path": "/api/cron/weekly-recap",
+      "schedule": "0 13 * * 0"
+    },
+    {
+      "path": "/api/cron/sync-events",
+      "schedule": "0 11 * * 0,3"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.example.com" }],
+      "destination": "https://example.com/:path*",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/sitemap.xml",
+      "destination": "/sitemap-index.xml"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(self)" },
+        { "key": "X-DNS-Prefetch-Control", "value": "on" },
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://us.i.posthog.com https://cdn.apple-mapkit.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdn.apple-mapkit.com; img-src 'self' data: blob: https:; connect-src 'self' https://us.i.posthog.com https://*.posthog.com https://cdn.apple-mapkit.com https://*.apple-mapkit.com; worker-src 'self' blob:; frame-ancestors 'none';" }
+      ]
+    },
+    {
+      "source": "/_next/static/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/favicon.ico",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400" }
+      ]
+    }
+  ]
+}

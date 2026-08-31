@@ -1,0 +1,103 @@
+name: Production Smoke Tests
+
+# Runs the runtime suites against a DEPLOYED origin. Two of them now:
+#   - money-path: can a person still complete the five revenue-bearing actions.
+#   - mobile-layout: is any content clipped off the right edge of a phone, at
+#     390px and 320px. Added after /explore shipped cards running up to 260px
+#     past the viewport and four tables silently ate their last column.
+#
+# Why post-deploy against production and not against a preview. Preview-green
+# has twice failed to predict production on this repo: both conversion-killing
+# bugs of 2026-07 passed a Vercel preview and `npm run verify`, then broke for
+# real users. Every other gate here inspects the source; this is the only one
+# that asks whether a person can complete an action, and it has to ask it where
+# the people are.
+#
+# Triggers:
+#   - deployment_status: fires the moment Vercel marks a PRODUCTION deploy
+#     successful, which is exactly when a regression becomes real.
+#   - schedule: a daily safety net, because not every breakage arrives with a
+#     deploy (a flag flip, an env change, or a data problem can do it).
+#   - workflow_dispatch: manual, with an optional URL for checking a preview.
+#
+# A failure opens or updates a labelled issue as well as failing the check. A
+# suite nobody notices is worse than no suite, because it implies coverage that
+# does not exist.
+
+on:
+  deployment_status:
+  schedule:
+    - cron: "0 7 * * *"
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: "Origin to test (defaults to production)"
+        required: false
+        default: "https://example.com"
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  smoke:
+    # On a deployment_status event, only run for a SUCCESSFUL PRODUCTION
+    # deploy. Without this the job fires on every preview and on pending and
+    # failed states too.
+    if: >-
+      github.event_name != 'deployment_status' ||
+      (github.event.deployment_status.state == 'success' &&
+       github.event.deployment_status.environment == 'Production')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm ci --ignore-scripts
+      # webkit is REQUIRED, not optional. The mobile-layout projects spread
+      # devices["iPhone 14"], which carries defaultBrowserType: "webkit", so
+      # they launch WebKit no matter which engine the rest of the suite uses.
+      # Installing only chromium made every mobile test die in under 30ms with
+      # "Executable doesn't exist", which reads as 28 layout failures rather
+      # than as a missing browser. Keeping WebKit is deliberate: iPhone Safari
+      # is the engine this audience actually renders in, so the layout suite
+      # should measure it rather than a Chromium emulation of it.
+      - run: npx playwright install --with-deps chromium webkit
+
+      - name: Run production smoke suite
+        id: smoke
+        env:
+          SMOKE_BASE_URL: ${{ github.event.inputs.base_url || 'https://example.com' }}
+        run: |
+          set +e
+          npx playwright test --reporter=list 2>&1 | tee smoke.txt
+          echo "exit_code=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
+
+      - name: Upload trace on failure
+        if: steps.smoke.outputs.exit_code != '0'
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-trace
+          path: test-results/
+          retention-days: 7
+
+      - name: Open or update the tracking issue
+        if: steps.smoke.outputs.exit_code != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          SMOKE_BASE_URL: ${{ github.event.inputs.base_url || 'https://example.com' }}
+        run: |
+          BODY="$(printf '**A production smoke test is failing on %s.**\n\nThis suite only asserts things a visitor must be able to do. The money-path tests cover reaching the quiz from the hero, loading a usable signup form, getting a visible error instead of silence, seeing listings, and being routed to signup when saving while logged out. The mobile-layout tests cover whether any content is clipped off the right edge of a phone screen, where it is unreachable rather than merely ugly.\n\nRead the failing test name below to tell which.\n\n```\n%s\n```\n\n[Full run and trace](%s)\n\nReproduce locally: `npm run test:smoke`' "${SMOKE_BASE_URL:-https://example.com}" "$(tail -60 smoke.txt)" "$RUN_URL")"
+          EXISTING=$(gh issue list --label production-smoke --state open --limit 1 --json number --jq '.[0].number')
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --body "$BODY"
+          else
+            gh label create production-smoke --color B60205 --description "A runtime smoke test is failing in production" --force >/dev/null 2>&1 || true
+            gh issue create --title "Production smoke test failing" --label production-smoke --body "$BODY"
+          fi
+
+      - name: Fail the job when the smoke test failed
+        if: steps.smoke.outputs.exit_code != '0'
+        run: exit 1

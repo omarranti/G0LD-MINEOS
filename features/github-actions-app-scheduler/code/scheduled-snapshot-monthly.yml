@@ -1,0 +1,68 @@
+name: Progress Snapshot (monthly)
+
+# 1st of the month, 06:00 UTC: record the closed month into
+# src/lib/progress/snapshots/ so the timeline's history is what the ledger
+# recorded at the time. Data comes from the PIN-gated snapshot endpoint (the
+# signed admin cookie in ADMIN_PIN_COOKIE), so no database credential lives
+# in GitHub. The same run reminds the owner when the next month has no targets on
+# file; it never derives targets itself.
+
+on:
+  schedule:
+    - cron: "0 6 1 * *"
+  workflow_dispatch:
+    inputs:
+      month:
+        description: "Month to record (YYYY-MM); defaults to the previous UTC month"
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: progress-autonomy
+  cancel-in-progress: false
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require the owner PAT and the admin cookie
+        env:
+          PAT: ${{ secrets.PROGRESS_UPKEEP_PAT }}
+          COOKIE: ${{ secrets.ADMIN_PIN_COOKIE }}
+        run: |
+          if [ -z "$PAT" ] || [ -z "$COOKIE" ]; then
+            echo "::error::PROGRESS_UPKEEP_PAT or ADMIN_PIN_COOKIE is not set. Run scripts/arm-progress-secrets.sh locally."
+            exit 1
+          fi
+
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.PROGRESS_UPKEEP_PAT }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Record the monthly snapshot
+        env:
+          GH_TOKEN: ${{ secrets.PROGRESS_UPKEEP_PAT }}
+          ADMIN_PIN_COOKIE: ${{ secrets.ADMIN_PIN_COOKIE }}
+          MONTH_ARG: ${{ inputs.month }}
+        run: npx tsx scripts/progress-snapshot.ts --source url ${MONTH_ARG:+--month "$MONTH_ARG"}
+
+      - name: Notify on infrastructure failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.PROGRESS_UPKEEP_PAT != '' && secrets.PROGRESS_UPKEEP_PAT || github.token }}
+        run: |
+          gh label create progress-upkeep -R ${{ github.repository }} --color 1B3A5C --description "Autonomous north star upkeep needs a human" || true
+          gh issue create -R ${{ github.repository }} --title "Progress upkeep: monthly snapshot workflow failed before completion" --label progress-upkeep --body "Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}. The script may not have been able to notify on its own; check the logs."

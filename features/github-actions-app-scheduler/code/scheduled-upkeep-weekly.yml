@@ -1,0 +1,66 @@
+name: Progress Upkeep (weekly)
+
+# Monday 12:00 UTC (5am PT), so the registry is freshly true before the
+# Monday morning review of the progress console and the timeline.
+#
+# Lives in Actions rather than a cloud routine on purpose: the scheduled cloud
+# environment cannot reach the database or the host and cannot hold the the repo owner
+# identity, and Vercel silently BLOCKS production deploys whose merge is not
+# attributed to a team member. The PAT makes the PR owner deterministic.
+#
+# The job is a thin driver: all judgment lives in scripts/progress-upkeep.ts
+# and its tested rules, and the whitelist fence is enforced in the script, not
+# here. The script opens progress-upkeep issues for ambiguity and failure; the
+# last step here only covers infrastructure deaths before the script could.
+
+on:
+  schedule:
+    - cron: "0 12 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: progress-autonomy
+  cancel-in-progress: false
+
+jobs:
+  upkeep:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require the owner PAT
+        env:
+          PAT: ${{ secrets.PROGRESS_UPKEEP_PAT }}
+        run: |
+          if [ -z "$PAT" ]; then
+            echo "::error::PROGRESS_UPKEEP_PAT is not set. Without it the upkeep PR is owned by a bot and the production deploy silently BLOCKS. Run scripts/arm-progress-secrets.sh locally."
+            exit 1
+          fi
+
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.PROGRESS_UPKEEP_PAT }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Run the upkeep loop
+        env:
+          GH_TOKEN: ${{ secrets.PROGRESS_UPKEEP_PAT }}
+        run: npx tsx scripts/progress-upkeep.ts
+
+      - name: Notify on infrastructure failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.PROGRESS_UPKEEP_PAT != '' && secrets.PROGRESS_UPKEEP_PAT || github.token }}
+        run: |
+          gh label create progress-upkeep -R ${{ github.repository }} --color 1B3A5C --description "Autonomous north star upkeep needs a human" || true
+          gh issue create -R ${{ github.repository }} --title "Progress upkeep: weekly workflow failed before completion" --label progress-upkeep --body "Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}. The script may not have been able to notify on its own; check the logs."
